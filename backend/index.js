@@ -9,7 +9,7 @@ connectionDB();
 
 // CORS Configuration
 const corsoptions = {
-  origin:["http://localhost:3000","https://mern-demo-frontend-taupe.vercel.app/"],
+  origin:["http://localhost:3000","https://mern-demo-frontend-taupe.vercel.app"],
   methods: "GET,HEAD,PUT,POST,DELETE",
   credentials: true,
   allowedHeaders: "Content-Type,Authorization",
