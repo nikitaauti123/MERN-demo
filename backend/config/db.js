@@ -1,30 +1,23 @@
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
 dotenv.config();
 
-const connectDB = async () => {
-  try {
-    console.log("Connecting to MongoDB...");
-    await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 5000, // 5s timeout
-    });
+const connectDB = async () =>{
+    try{
+          await mongoose.connect("mongodb+srv://nikitaauti123:10ZhZeT2FSujshuN@test.ump31.mongodb.net/?retryWrites=true&w=majority&appName=test");
+        //   await mongoose.connect(process.env.MONGODB_URI);
+        //await mongoose.connect("mongodb://localhost:27017/test");
+        console.log('mongdb connected');
 
-    console.log("MongoDB Connected Successfully");
-  } catch (error) {
-    console.error("Error connecting to MongoDB:", error.message);
-
-    if (error.message.includes("database exists")) {
-      console.log("Database already exists");
+    }catch(error){
+        if(error.message.includes('database exists')){
+            console.log('database already exist');
+        } else {
+            console.error('error connecting to mongodb',error.message);
+        }
+        process.exit(1);
     }
-
-    // Avoid exiting process in serverless environments like Vercel
-    if (process.env.NODE_ENV !== "production") {
-      process.exit(1);
-    }
-  }
-};
+}
 
 module.exports = connectDB;
