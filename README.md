@@ -26,10 +26,8 @@ Password: admin123
 │-- frontend/  # React application
 │-- backend/   # Node.js/Express API
 │-- README.md  # This file
-
-🏗 Setup Instructions
-
-🔹 Backend Setup
+Setup Instructions
+Backend Setup
 
 Navigate to the backend folder:
 
@@ -47,7 +45,7 @@ npm run dev
 
 The backend should be running at http://localhost:8git 000.
 
-🔹 Frontend Setup
+Frontend Setup
 
 Navigate to the frontend folder:
 
