@@ -14,7 +14,6 @@ import { CiEdit } from "react-icons/ci";
 import { ImCross } from "react-icons/im";
 import { FcApproval } from "react-icons/fc";
 import { AuthContext } from "../context/AuthContext";
-
 const TaskList = () => {
     const { setAuth } = useContext(AuthContext);
     const userInfo = getUserFromToken();
