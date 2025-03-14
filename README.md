@@ -39,11 +39,15 @@ npm install
 
 Create a .env file in the backend folder and add the necessary environment variables (e.g., MongoDB URI, JWT secret).
 
+<!-- JWT_SECRET=d30032d87810993269e5402bcdf935f92950428ffda00157bbc22817299873700be45ea50302dc817c61f09837869738601b22f03a62d680c703c22ff660d6f8
+MONGODB_URI=mongodb://localhost:27017/test -->
+
+
 Run the backend server:
 
 npm run dev
 
-The backend should be running at http://localhost:8git 000.
+The backend should be running at http://localhost:8000.
 
 Frontend Setup
 

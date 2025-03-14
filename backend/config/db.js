@@ -3,21 +3,17 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const connectDB = async () =>{
-    try{
-          await mongoose.connect("mongodb+srv://nikitaauti123:10ZhZeT2FSujshuN@test.ump31.mongodb.net/test?retryWrites=true&w=majority&appName=test");
-        //   await mongoose.connect(process.env.MONGODB_URI);
-        //await mongoose.connect("mongodb://localhost:27017/test");
-        console.log('mongdb connected');
-
-    }catch(error){
-        if(error.message.includes('database exists')){
-            console.log('database already exist');
-        } else {
-            console.error('error connecting to mongodb',error.message);
-        }
+const connectDB = async () => {
+    try {
+        await mongoose.connect(process.env.MONGODB_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        console.log('MongoDB connected successfully');
+    } catch (error) {
+        console.error('Error connecting to MongoDB:', error.message);
         process.exit(1);
     }
-}
+};
 
 module.exports = connectDB;
