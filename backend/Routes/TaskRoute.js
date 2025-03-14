@@ -10,8 +10,8 @@ const {
   const express = require('express');
   router = express.Router();
   router.post('/task',addtask);
-  router.get('/task',authMiddleware,getAllTask);
-  router.get('/task/:id',authMiddleware,getSingletask);
+  router.get('/task',getAllTask);
+  router.get('/task/:id',getSingletask);
 router.put('/task/:id',updatetask);
 router.delete('/task/:id',deletetask);
 router.post('/updatetasktStatus/:id',updatetasktStatus)
