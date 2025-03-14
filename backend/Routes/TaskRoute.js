@@ -5,7 +5,6 @@ const {
     getSingletask,
     deletetask,updatetasktStatus
   } = require("../Controllers/TaskController");
-  const authMiddleware = require("../Middleware/authMiddleware");
 
   const express = require('express');
   router = express.Router();

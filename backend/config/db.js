@@ -5,9 +5,8 @@ dotenv.config();
 
 const connectDB = async () =>{
     try{
-         await mongoose.connect("mongodb+srv://nikitaauti123:10ZhZeT2FSujshuN@test.ump31.mongodb.net/test?retryWrites=true&w=majority&appName=test");
-        // await mongoose.connect(process.env.MONGODB_URI);
-        //await mongoose.connect("mongodb://localhost:27017/test");
+          await mongoose.connect(process.env.MONGODB_URI);
+        // await mongoose.connect("mongodb://localhost:27017/AJV");
         console.log('mongdb connected');
 
     }catch(error){
@@ -21,5 +20,3 @@ const connectDB = async () =>{
 }
 
 module.exports = connectDB;
-
-
