@@ -1,0 +1,3 @@
+node_modules/
+.next/cache/
+backend/node_modules/
