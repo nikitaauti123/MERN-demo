@@ -39,46 +39,7 @@ const TaskList = () => {
         setSearch(value);
       }
     };
-    const handleDelete = async (e, id) => {
-      e.preventDefault();
-      const taskdelete = window.confirm(
-        "Are you sure, you want to delete the Appraisal"
-      );
-      if (taskdelete) {
-        let activOne = task.length === 1;
-        if (count === 1) {
-          activOne = false;
-        }
-        const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/deletetask`, {
-          method: "DELETE",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id }),
-        });
   
-        if (!res.ok) {
-          throw new Error("Network response was not ok");
-        }
-  
-        const response = await res.json();
-        if (response.success) {
-          toast.success("task is deleted successfully!", {
-            position: "top-right",
-            autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-          if (activOne) {
-            setPage(page - 1);
-          } else {
-            fetchtask();
-          }
-        }
-      }
-    };
     useEffect(() => {
       fetchtask();
     }, [page, search]);
@@ -207,6 +168,48 @@ const TaskList = () => {
           }
         } catch (error) {
           console.error("Logout failed:", error);
+        }
+      };
+
+      const handleDelete = async (e, id) => {
+        e.preventDefault();
+        const permissionOfDelete = window.confirm(
+          "Are you sure, you want to delete the task"
+        );
+        if (permissionOfDelete) {
+          let clientOne = task.length === 1;
+          if (count === 1) {
+            clientOne = false;
+          }
+          const res = await fetch(
+            `${process.env.REACT_APP_BACKEND_URL}/api/task/${id}`,
+            {
+              method: "DELETE",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ id }),
+            }
+          );
+          if (!res.ok) {
+            throw new Error("Network response was not ok");
+          }
+          const response = await res.json();
+          if (response.success) {
+            toast.success("task is deleted Successfully!", {
+              position: "top-right",
+              autoClose: 1000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+            if (clientOne) {
+              setPage(page - 1);
+            } else {
+              fetchtask();
+            }
+          }
         }
       };
     
@@ -382,6 +385,11 @@ const TaskList = () => {
                         <NavLink to={`/edittask/${item?._id}`}>
                         <CiEdit className="text-2xl cursor-pointer text-green-900" />
                       </NavLink>
+                      <button
+                            onClick={(e) => handleDelete(e, item._id)}
+                            className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                          >
+                            <MdDelete className="inline mr-2" />                           </button>
                   </td>            </tr>
                 );
               })}
@@ -390,7 +398,7 @@ const TaskList = () => {
         )}
       </div>
       {noData && <div className="text-center text-xl">
-            Currently! There are no Appraisal in the storage.
+            Currently! There are no Task in the storage.
           </div>}
 
       {task.length > 0 && (

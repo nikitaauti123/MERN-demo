@@ -20,7 +20,7 @@ Email: admin@example.com
 Password: admin123
 
 
-📂 Project Structure
+Project Structure
 
 /project-root
 │-- frontend/  # React application
@@ -29,11 +29,11 @@ Password: admin123
 Setup Instructions
 Backend Setup
 
-Navigate to the backend folder:
+<!-- Navigate to the backend folder: -->
 
 cd backend
 
-Install dependencies:
+<!-- Install dependencies: -->
 
 npm install
 
@@ -43,26 +43,30 @@ Create a .env file in the backend folder and add the necessary environment varia
 MONGODB_URI=mongodb://localhost:27017/test -->
 
 
-Run the backend server:
+<!-- Run the backend server: -->
 
 npm run dev
 
 The backend should be running at http://localhost:8000.
 
-Frontend Setup
+<!-- Frontend Setup -->
 
-Navigate to the frontend folder:
+<!-- Navigate to the frontend folder: -->
 
 cd frontend
 
-Install dependencies:
+<!-- Install dependencies: -->
 
 npm install
 
-Update the API URL in frontend/.env to match your backend URL.
+<!-- Update the API URL in frontend/.env to match your backend URL. -->
 
-Run the frontend application:
+<!-- Run the frontend application: -->
 
 npm start
 
 The frontend should be running at http://localhost:3000.
+
+credentails for login 
+username - admin@gmail.com
+password - 12345

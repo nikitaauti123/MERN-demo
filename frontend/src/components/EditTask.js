@@ -187,7 +187,7 @@ const EditTask = () => {
                 onChange={handleChange}
                 className="border border-gray-300 rounded-lg w-full p-2"
               >
-                <option value="">Select Priority</option>
+                {/* <option value="">Select Priority</option> */}
                 <option value="Low">Low</option>
                 <option value="Medium">Medium</option>
                 <option value="High">High</option>
