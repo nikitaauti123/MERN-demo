@@ -59,8 +59,7 @@ const TaskList = () => {
     const fetchtask = async () => {
         
         setLoader(true);
-        const token = localStorage.getItem("token"); // Retrieve the stored token
-        
+        const token = Cookies.get("jwt");   
         try {
           const res = await fetch(
             `${process.env.REACT_APP_BACKEND_URL}/api/task?page=${page}&limit=${pageSize}&search=${search}`,
