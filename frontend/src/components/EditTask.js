@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import $ from "jquery";
 import "jquery-validation";
 import { NavLink } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const EditTask = () => {
   const [loader, setLoader] = useState(false);
@@ -27,12 +28,16 @@ const EditTask = () => {
   }, []);
 
   const fetchOldData = async () => {
+    const token = Cookies.get("jwt");   
     try {
       const res = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/api/task/${id}`,
         {
           method: "GET",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            Authorization: `Bearer ${token}`, // Include JWT token
+            "Content-Type": "application/json",
+          },
         }
       );
       const response = await res.json();
@@ -106,6 +111,7 @@ const EditTask = () => {
     if (!$("#taskForm").valid()) {
       return;
     }
+    const token = Cookies.get("jwt");   
 
     try {
       setLoader(true);
@@ -114,7 +120,10 @@ const EditTask = () => {
         `${process.env.REACT_APP_BACKEND_URL}/api/task/${id}`,
         {
           method: "PUT",
-          headers: { "Content-Type": "application/json" },
+            headers: {
+                Authorization: `Bearer ${token}`, // Include JWT token
+                "Content-Type": "application/json",
+              },
           body: JSON.stringify(updatedata),
         }
       );

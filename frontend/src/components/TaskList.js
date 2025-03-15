@@ -94,6 +94,7 @@ const TaskList = () => {
         if (newStatus === 'Completed' ) {
           status = "Completed";
         }
+        const token = Cookies.get("jwt");   
         const permissionOfDelete = window.confirm(`Are you sure change status of task to ${status} ?`);
         if (permissionOfDelete) {
           let projectOne = task.length === 1;
@@ -104,7 +105,8 @@ const TaskList = () => {
             const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/updatetasktStatus/${id}`, {
               method: 'POST',
               headers: {
-                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`, // Include JWT token
+                "Content-Type": "application/json",
               },
               body: JSON.stringify({ status: newStatus }),
             });
@@ -180,11 +182,15 @@ const TaskList = () => {
           if (count === 1) {
             clientOne = false;
           }
+          const token = Cookies.get("jwt"); 
           const res = await fetch(
             `${process.env.REACT_APP_BACKEND_URL}/api/task/${id}`,
             {
               method: "DELETE",
-              headers: { "Content-Type": "application/json" },
+              headers: {
+                Authorization: `Bearer ${token}`, // Include JWT token
+                "Content-Type": "application/json",
+              },
               body: JSON.stringify({ id }),
             }
           );

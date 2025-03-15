@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import $ from "jquery";
 import "jquery-validation";
 import { NavLink } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const TaskManager = () => {
   const navigate = useNavigate();
@@ -71,12 +72,15 @@ const TaskManager = () => {
     if (!$("#taskForm").valid()) {
       return;
     }
-
+  const token = Cookies.get("jwt");   
     try {
       setLoader(true);
       const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/task`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+         headers: {
+          Authorization: `Bearer ${token}`, // Include JWT token
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(data),
         "Authorization": `Bearer ${localStorage.getItem("token")}` // Send JWT token
       });
