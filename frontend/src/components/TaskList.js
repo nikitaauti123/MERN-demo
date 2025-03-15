@@ -25,6 +25,7 @@ const TaskList = () => {
     const [count, setCount] = useState(0);
     const [loader, setLoader] = useState(true);
     const [noData, setNoData] = useState(false);
+    const [filter, setfilter] = useState("");
     const navigate = useNavigate();
     useEffect(() => {
      const token = Cookies.get("jwt");
@@ -38,11 +39,15 @@ const TaskList = () => {
         setPage(1);
         setSearch(value);
       }
+      if (name === "filter") {
+        setfilter(value);
+        setPage(1);
+      }
     };
   
     useEffect(() => {
       fetchtask();
-    }, [page, search]);
+    }, [page,filter,pageSize, search]);
   
     const fetchEmployeeName = async (id) => {
       const nameRes = await fetch(
@@ -62,7 +67,7 @@ const TaskList = () => {
         const token = Cookies.get("jwt");   
         try {
           const res = await fetch(
-            `${process.env.REACT_APP_BACKEND_URL}/api/task?page=${page}&limit=${pageSize}&search=${search}`,
+            `${process.env.REACT_APP_BACKEND_URL}/api/task?page=${page}&limit=${pageSize}&search=${search}&filter=${filter}`,
             {
               method: "GET",
               headers: {
@@ -257,7 +262,7 @@ const TaskList = () => {
             </button>
           </NavLink>
           
-        <div className={` flex items-center`}>
+        <div className={` flex`}>
           <input
             placeholder="Search "
             type="text"
@@ -267,15 +272,31 @@ const TaskList = () => {
             className={`text-black border-[1px] rounded-lg bg-white p-2 m-5`}
           />
         </div>
+        <div className={` flex `}>
+          <select
+            type="text"
+            name="filter"
+            value={filter}
+            onChange={handleChange}
+            className={`text-black border-[1px] rounded-lg bg-white p-2 m-5`}
+          >
+            <option value="">select filter</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+           
+          </select>
+        </div>
       </div>
-      {/* {loader && <div className="absolute h-full w-full  flex justify-center items-center"><div
+     
+      {/* {{loader && <div className="absolute h-full w-full  flex justify-center items-center"><div
         className=" flex justify-center h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
         role="status">
         <span
           className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
           >Loading...</span
         >
-      </div></div>} */}
+       </div></div>} } */}
 
       <div className="relative overflow-x-auto m-5 mb-0">
         {task.length > 0 && (

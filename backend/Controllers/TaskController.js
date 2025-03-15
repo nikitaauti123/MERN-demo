@@ -39,13 +39,20 @@ const getAllTask = async (req, res) => {
     const pageSize = parseInt(req.query.limit);
     const page = parseInt(req.query.page);
     const search = req.query.search;
+    const filter = req.query.filter;
     const query = {
       deleted_at: null,
     };
     if (search) {
       query.title = { $regex: search, $options: "i" }; // Add search condition if provided
     }
-
+    if (filter === "Low") {
+      query.priority = "Low"; // Filter by status 1
+    } else if (filter === "Medium") {
+      query.priority = "Medium"; // Filter by status 0
+    } else if (filter === "High") {
+      query.priority = "High"; // Filter by status 0
+    }
     const result = await Task.find(query)
       .sort({ createdAt: -1 })
       .skip((page - 1) * pageSize)
